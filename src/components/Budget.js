@@ -3,15 +3,27 @@ You will be importing app context and the useContext hook, and pass
 your AppContext to it - this is how a component connects to the context 
 in order to get values from global state */
 
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {AppContext} from '../context/AppContext';
 
 const Budget = () => {
-    const { budget } = useContext(AppContext);
+    const { budget, currency } = useContext(AppContext);
+
+    const [bud, setBud] = useState('');
 
     return (
         <div className='alert alert-secondary'>
-            <span>Budget: ${budget}</span>
+            <span>Budget: {currency}
+                <input
+                        placeholder={budget}
+                        required='required'
+                        type='number'
+                        id='budget'
+                        value={bud}
+                        style={{size: 10}}
+                        onChange={(event) => setBud(event.target.value)}>
+                </input>
+            </span>    
         </div>
     );
 };
